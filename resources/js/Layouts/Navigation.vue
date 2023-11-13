@@ -11,7 +11,7 @@
                 ? 'translate-x-0 ease-out'
                 : '-translate-x-full ease-in'
         "
-        class="overflow-y-auto fixed inset-y-0 left-0 z-30 w-64 bg-gray-900 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0"
+        class="overflow-y-auto fixed inset-y-0 left-0 z-30 w-64 bg-purple-900 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0"
     >
         <div class="flex justify-center items-center mt-8">
             <div class="flex items-center">
@@ -71,6 +71,28 @@
                 Dashboard
             </nav-link>
 
+            <nav-link
+                :href="route('users.index')"
+                :active="route().current('users.index')"
+            >
+                <template #icon>
+                    <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                        ></path>
+                    </svg>
+                </template>
+                Employees
+            </nav-link>
             <nav-link
                 :href="route('users.index')"
                 :active="route().current('users.index')"
