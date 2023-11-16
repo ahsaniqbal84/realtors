@@ -72,8 +72,8 @@
             </nav-link>
 
             <nav-link
-                :href="route('users.index')"
-                :active="route().current('users.index')"
+                :href="route('employees.index')"
+                :active="route().current('employeess.index')"
             >
                 <template #icon>
                     <svg
