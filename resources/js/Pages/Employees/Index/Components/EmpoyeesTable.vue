@@ -3,25 +3,32 @@
         <thead>
             <tr>
                 <th>Serial Number</th>
-                <th>Name</th>
+                <th>First Name</th>
+                <th>last Name</th>
                 <th>Code</th>
-                <th>Phone</th>
-                <th>Department</th>
-                <th>City</th>
+                <th>Designation</th>
                 <th>Team</th>
+                <th>Phone</th>
+                <th>City</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(employee, index) in employees" :key="index">
-                <td>{{ index + 1 }}</td>
-                <td>{{ employee.name }}</td>
+                <td>{{ employee.employee_id }}</td>
+                <td>{{ employee.first_name }}</td>
+                <td>{{ employee.last_name }}</td>
                 <td>{{ employee.code }}</td>
-                <td>{{ employee.phone }}</td>
-                <td>{{ employee.department }}</td>
+                <td>{{ employee.designation_name }}</td>
+                <td>
+                    <span v-if="employee.team_id === null"
+                        >No Team Assigned</span
+                    >
+                    <span v-else>{{ employee.team_id }}</span>
+                </td>
+                <td>{{ employee.mobile_number }}</td>
                 <td>{{ employee.city }}</td>
-                <td>{{ employee.team }}</td>
                 <td>{{ employee.status }}</td>
                 <td>
                     <!-- Add your action buttons or links here -->
