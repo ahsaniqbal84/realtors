@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,9 +16,20 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        DB::table('roles')->insert([
+            ['name' => 'Finance'],
+            ['name' => 'HR'],
+            ['name' => 'Admin'],
+        ]);
+
+        \App\Models\User::factory()->create([
+            'user_name' => 'ahsan test',
+            'email' => 'ahsan@test.com',
+            'role_id' => 1,
+        ]);
+
+        \App\Models\User::factory(10)->create();
+
+        
     }
 }
