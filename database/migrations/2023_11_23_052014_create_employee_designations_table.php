@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('employee_designations', function (Blueprint $table) {
             $table->id('designation_id');
             $table->string('name',255);
-            $table->decimal('commission',8,2)->default(2.5);
+            $table->decimal('commission',10,2)->default(2.5);
             $table->unsignedBigInteger('target')->default(3_000_000);
             $table->timestamps();
         });

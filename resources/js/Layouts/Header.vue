@@ -8,7 +8,7 @@
                     $page.props.showingMobileMenu =
                         !$page.props.showingMobileMenu
                 "
-                class="text-gray-500 focus:outline-none lg:hidden"
+                class="text-white focus:outline-none lg:hidden"
             >
                 <svg
                     class="h-6 w-6"
@@ -34,7 +34,7 @@
                         @click="dropdownOpen = !dropdownOpen"
                         class="relative block overflow-hidden"
                     >
-                        {{ $page.props.auth.user.name }}
+                        {{ $page.props.auth.user.user_name }}
                     </button>
                 </template>
 
