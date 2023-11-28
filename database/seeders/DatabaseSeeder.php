@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+<<<<<<< Updated upstream
         DB::table('roles')->insert([
             ['name' => 'Finance'],
             ['name' => 'HR'],
@@ -67,5 +68,11 @@ class DatabaseSeeder extends Seeder
 
 
         
+=======
+        \App\Models\User::factory()->create([
+            'name' => 'Test',
+            'email' => 'test@example.com',
+        ]);
+>>>>>>> Stashed changes
     }
 }
