@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="create">
+    <form @submit.prevent="update">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-2">
                 <label class="label">First Name</label>
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="col-span-6">
-                <button type="submit" class="btn-primary">Create</button>
+                <button type="submit" class="btn-primary">Update</button>
             </div>
         </div>
     </form>
@@ -127,27 +127,30 @@
 import { reactive } from "vue";
 //import { useForm } from "@inertiajs/inertia-vue3";
 import { useForm } from "@inertiajs/vue3";
-const form = useForm({
-    first_name: null,
-    last_name: null,
-    gender: null,
-    code: null,
-    office_id: null,
-    team_id: null,
-    department_id: null,
-    designation_id: null,
-    mobile_number: null,
-    status: 1,
-    city: null,
-});
-defineProps({
+
+const props = defineProps({
+    employee: Object,
     offices: Object,
     departments: Object,
     designations: Object,
     teams: Object,
 });
+const form = useForm({
+    first_name: props.employee.first_name,
+    last_name: props.employee.last_name,
+    gender: props.employee.gender,
+    code: props.employee.code,
+    office_id: props.employee.office_id,
+    team_id: props.employee.team_id,
+    department_id: props.employee.department_id,
+    designation_id: props.employee.designation_id,
+    mobile_number: props.employee.mobile_number,
+    status: props.employee.status,
+    city: props.employee.city,
+});
 
-const create = () => form.post(route("employees.store"));
+const update = () =>
+    form.put(route("employees.update", { id: props.employee.employee_id }));
 </script>
 
 <style scope>

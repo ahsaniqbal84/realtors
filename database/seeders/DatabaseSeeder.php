@@ -62,6 +62,23 @@ class DatabaseSeeder extends Seeder
             ['first_name' => 'test','last_name'=>'customer','cnic'=>'1234567891011','address'=>'from islamabad','employee_id'=>1,'status'=>true]
         ]);
 
+        DB::table('zms')->insert([
+            ['employee_id'=>1],
+        ]);
+
+        DB::table('zms')->insert([
+            ['employee_id'=>3,'zm_id'=>1,],
+            ['employee_id'=>2,'zm_id'=>1,],
+        ]);
+
+        DB::table('teams')->insert([
+            ['name'=>'Hawk','bcm_id'=>1,],
+            ['name'=>'Falcon','bcm_id'=>1,],
+            ['name'=>'Gladiator','bcm_id'=>1,],
+            ['name'=>'Qalandar','bcm_id'=>2,],
+            ['name'=>'united','bcm_id'=>2,],
+        ]);
+
 
 
 

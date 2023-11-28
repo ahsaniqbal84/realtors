@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'employee_id';
     protected $fillable=['first_name','last_name','gender','code','office_id','manager_id','designation_id','department_id','team_id','join_date','resign_date','mobile_number','city','status'];
     
     public function designation()

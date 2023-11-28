@@ -3,8 +3,7 @@
         <thead>
             <tr>
                 <th>Serial Number</th>
-                <th>First Name</th>
-                <th>last Name</th>
+                <th>Name</th>
                 <th>Code</th>
                 <th>Designation</th>
                 <th>Team</th>
@@ -17,8 +16,14 @@
         <tbody>
             <tr v-for="(employee, index) in employees" :key="index">
                 <td>{{ employee.employee_id }}</td>
-                <td>{{ employee.first_name }}</td>
-                <td>{{ employee.last_name }}</td>
+                <td>
+                    <Link
+                        :href="route('employees.edit', employee.employee_id)"
+                        class="hover:text-purple-500 text-purple-900"
+                        >{{ employee.first_name }}
+                        {{ employee.last_name }}</Link
+                    >
+                </td>
                 <td>{{ employee.code }}</td>
                 <td>{{ employee.designation_name }}</td>
                 <td>
@@ -41,6 +46,7 @@
 </template>
 
 <script setup>
+import { Link } from "@inertiajs/vue3";
 const props = defineProps(["employees"]);
 
 const editEmployee = (employee) => {

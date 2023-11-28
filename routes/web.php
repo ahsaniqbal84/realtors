@@ -42,6 +42,8 @@ Route::get('/dashboard', function () {
 Route::get('/employees', [EmployeesController::class, 'index'])->name('employees.index');
 Route::get('/employees/create', [EmployeesController::class, 'create'])->name('employees.create');
 Route::post('/employees', [EmployeesController::class, 'store'])->name('employees.store');
+Route::get('/employees/{id}/edit', [EmployeesController::class, 'edit'])->name('employees.edit');
+Route::put('/employees/{id}', [EmployeesController::class, 'update'])->name('employees.update');
 
 
 
