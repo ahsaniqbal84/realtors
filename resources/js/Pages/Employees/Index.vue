@@ -4,13 +4,19 @@
     <AuthenticatedLayout>
         <template #header> Employees </template>
         <div>
-            <button as="button" class="btn-primary">Add Employee</button>
+            <Link
+                :href="route('employees.create')"
+                as="button"
+                class="btn-primary"
+                >Add Employee</Link
+            >
         </div>
         <EmployeesTable :employees="employees"></EmployeesTable>
     </AuthenticatedLayout>
 </template>
 
 <script setup>
+import { Link } from "@inertiajs/vue3";
 import { ref, onMounted } from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import EmployeesTable from "@/Pages/Employees/Index/Components/EmpoyeesTable.vue";

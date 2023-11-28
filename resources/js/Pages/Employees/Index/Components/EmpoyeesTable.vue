@@ -25,7 +25,7 @@
                     <span v-if="employee.team_id === null"
                         >No Team Assigned</span
                     >
-                    <span v-else>{{ employee.team_id }}</span>
+                    <span v-else>{{ employee.team_name }}</span>
                 </td>
                 <td>{{ employee.mobile_number }}</td>
                 <td>{{ employee.city }}</td>

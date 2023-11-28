@@ -40,6 +40,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/employees', [EmployeesController::class, 'index'])->name('employees.index');
+Route::get('/employees/create', [EmployeesController::class, 'create'])->name('employees.create');
+Route::post('/employees', [EmployeesController::class, 'store'])->name('employees.store');
+
 
 
 
