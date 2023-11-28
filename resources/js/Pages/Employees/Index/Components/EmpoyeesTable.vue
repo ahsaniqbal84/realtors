@@ -19,7 +19,7 @@
                 <td>
                     <Link
                         :href="route('employees.edit', employee.employee_id)"
-                        class="hover:text-purple-500 text-purple-900"
+                        class="hover:text-purple-300 text-purple-600"
                         >{{ employee.first_name }}
                         {{ employee.last_name }}</Link
                     >
@@ -36,9 +36,12 @@
                 <td>{{ employee.city }}</td>
                 <td>{{ employee.status }}</td>
                 <td>
-                    <!-- Add your action buttons or links here -->
-                    <button @click="editEmployee(employee)">Edit</button>
-                    <button @click="deleteEmployee(employee)">Delete</button>
+                    <button
+                        class="text-purple-600 hover:text-purple-300"
+                        @click="deleteEmployee(employee)"
+                    >
+                        Delete
+                    </button>
                 </td>
             </tr>
         </tbody>
