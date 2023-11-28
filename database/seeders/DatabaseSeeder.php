@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'user_name' => 'Test',
             'email' => 'test@example.com',
         ]);
-    
+
 
         \App\Models\User::factory(10)->create();
 
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
             ['first_name' => 'employee', 'last_name'=>'7', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
             ['first_name' => 'employee', 'last_name'=>'8', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
             ['first_name' => 'employee', 'last_name'=>'9', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
-            
+
         ]);
 
         DB::table('customers')->insert([
@@ -88,7 +88,5 @@ class DatabaseSeeder extends Seeder
             ['name'=>'Qalandar','bcm_id'=>2,],
             ['name'=>'united','bcm_id'=>2,],
         ]);
-
-
     }
 }
