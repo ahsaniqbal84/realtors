@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'Test',
+            'user_name' => 'Test',
             'email' => 'test@example.com',
         ]);
     
@@ -56,10 +56,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('employees')->insert([
-            ['first_name' => 'employee', 'last_name'=>'1', 'gender'=>'male','code'=>112233,'office_id'=>1,'department_id'=>1,'designation_id'=>1,'mobile_number'=>'123123123','city'=>'islamabad', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'2', 'gender'=>'female','code'=>11223,'office_id'=>1,'department_id'=>2,'designation_id'=>3,'mobile_number'=>'123122388','city'=>'peshawar', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'3', 'gender'=>'male','code'=>1122,'office_id'=>2,'department_id'=>1,'designation_id'=>2,'mobile_number'=>'123123199','city'=>'islamabad', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'4', 'gender'=>'male','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
+            ['first_name' => 'employee', 'last_name'=>'1', 'gender'=>'m','code'=>112233,'office_id'=>1,'department_id'=>1,'designation_id'=>1,'mobile_number'=>'123123123','city'=>'islamabad', 'status'=>true],
+            ['first_name' => 'employee', 'last_name'=>'2', 'gender'=>'f','code'=>11223,'office_id'=>1,'department_id'=>2,'designation_id'=>3,'mobile_number'=>'123122388','city'=>'peshawar', 'status'=>true],
+            ['first_name' => 'employee', 'last_name'=>'3', 'gender'=>'f','code'=>1122,'office_id'=>2,'department_id'=>1,'designation_id'=>2,'mobile_number'=>'123123199','city'=>'islamabad', 'status'=>true],
+            ['first_name' => 'employee', 'last_name'=>'4', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
+            ['first_name' => 'employee', 'last_name'=>'5', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
+            ['first_name' => 'employee', 'last_name'=>'6', 'gender'=>'f','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
+            ['first_name' => 'employee', 'last_name'=>'7', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
+            ['first_name' => 'employee', 'last_name'=>'8', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
+            ['first_name' => 'employee', 'last_name'=>'9', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
             
         ]);
 
@@ -71,7 +76,7 @@ class DatabaseSeeder extends Seeder
             ['employee_id'=>1],
         ]);
 
-        DB::table('zms')->insert([
+        DB::table('bcms')->insert([
             ['employee_id'=>3,'zm_id'=>1,],
             ['employee_id'=>2,'zm_id'=>1,],
         ]);
