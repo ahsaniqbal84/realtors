@@ -1,5 +1,5 @@
 <template>
-    <Head title="Users" />
+    <Head title="Employees" />
 
     <AuthenticatedLayout>
         <template #header> Employees </template>

@@ -57,7 +57,7 @@ class EmployeesController extends Controller
 
     // You can add a success message or redirect to another page if needed
 
-    return redirect()->route('employees.index');
+    return redirect()->route('employees.index')->with('success','Employee is Created!');
     }
     public function create(){
         $offices = Office::all();
@@ -110,6 +110,6 @@ public function update(Request $request, $id)
         ])
     );
 
-    return redirect()->route('employees.index');
+    return redirect()->route('employees.index')->with('success','Employee is updated!');
 }
 }

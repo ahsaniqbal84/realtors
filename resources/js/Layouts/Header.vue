@@ -25,6 +25,45 @@
                     />
                 </svg>
             </button>
+            <button @click="goBack" class="text-white focus:outline-none mr-4">
+                <!-- SVG for back arrow -->
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="h-6 w-6"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 19l-7-7 7-7"
+                    ></path>
+                </svg>
+            </button>
+
+            <button
+                v-if="canGoForward"
+                @click="goForward"
+                class="text-white focus:outline-none"
+            >
+                <!-- SVG for forward arrow -->
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="h-6 w-6"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                    ></path>
+                </svg>
+            </button>
         </div>
 
         <div class="flex items-center">
@@ -58,6 +97,19 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
+
+const router = useRouter();
+
+const goBack = () => {
+    router.go(-1); // Go back one step in history
+};
+
+const goForward = () => {
+    router.go(1); // Go forward one step in history
+};
+
+let canGoForward = true;
 </script>
