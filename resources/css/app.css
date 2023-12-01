@@ -24,4 +24,19 @@
     .input-filter-r {
         @apply placeholder:text-gray-400 dark:placeholder:text-gray-600 border border-gray-200 dark:border-gray-700 rounded-t-md rounded-l-none rounded-b-none rounded-r-md text-sm font-medium text-gray-600 dark:text-gray-400 dark:bg-gray-800;
     }
+    table {
+        @apply w-full;
+    }
+    table th {
+        @apply border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600;
+    }
+    table td {
+        @apply border-b border-gray-200 bg-white px-5 py-5 text-sm;
+    }
+    table tr {
+        @apply border-b bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500;
+    }
+    .container {
+        @apply inline-block min-w-full overflow-hidden rounded-lg shadow;
+    }
 }

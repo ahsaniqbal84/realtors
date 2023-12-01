@@ -16,6 +16,11 @@ class Employee extends Model
         return $this->belongsTo(EmployeeDesignation::class,'designation_id');
     }
 
+    public function manager()
+    {
+        return $this->belongsTo(Employee::class, 'manager_id');
+    }
+
     public function office(){
         return $this->belongsTo(Office::class,'office_id');
     }
@@ -42,6 +47,11 @@ class Employee extends Model
 
     public function changeDesignations(){
         return $this->hasMany(ChangeDesignation::class,'employee_id');
+    }
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'manager_id');
     }
 
     public function bcm()

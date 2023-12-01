@@ -112,4 +112,12 @@ public function update(Request $request, $id)
 
     return redirect()->route('employees.index')->with('success','Employee is updated!');
 }
+
+public function destroy($id){
+    $employee = Employee::find($id);
+    $employee->delete();
+    return redirect()->route('employees.index')->with('success','Employee is deleted!');
+
+
+}
 }

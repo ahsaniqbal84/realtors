@@ -65,7 +65,7 @@
                         >
                             {{ team.name }}
                         </option>
-                        <option :value="null">Not Assign</option>
+                        <option :value="null">none</option>
                     </select>
                     <div v-if="form.errors.team_id" class="input-error">
                         {{ form.errors.team_id }}

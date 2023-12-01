@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id('employee_id');
+            $table->foreignId('manager_id')->nullable()->onDelete('set null');
             $table->foreignId('designation_id')->nullable()->default(null);
             $table->char('first_name',100);
             $table->char('last_name',100);
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('designation_id')->references('designation_id')->on('employee_designations');
+            $table->foreign('manager_id')->references('employee_id')->on('employees');
             
         });
     }
