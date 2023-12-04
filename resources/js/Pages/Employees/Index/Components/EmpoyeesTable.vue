@@ -64,7 +64,7 @@ const props = defineProps(["employees"]);
 <style scoped>
 /* Add your styling here */
 
-table {
+/* table {
     width: 100%;
     border-collapse: collapse;
     overflow-x: scroll;
@@ -106,5 +106,5 @@ table tr {
     border-radius: 0.375rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
         0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+} */
 </style>

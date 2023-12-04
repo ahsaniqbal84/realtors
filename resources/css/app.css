@@ -34,6 +34,6 @@
         @apply border-b bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500;
     }
     .container {
-        @apply inline-block min-w-full overflow-hidden rounded-lg shadow;
+        @apply inline-block min-w-full rounded-lg shadow;
     }
 }

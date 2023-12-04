@@ -31,29 +31,30 @@ import { inject, watch } from "vue";
 const page = usePage();
 const flashSuccess = computed(() => page.props.flash.success);
 const swal = inject("$swal");
-watch(flashSuccess, (newVal) => {
-    console.log(" new val is " + newVal);
-    if (newVal) {
-        showAlertDialog(newVal);
-    }
-});
 
-function showAlertDialog(message) {
-    swal.fire({
-        icon: "success",
-        title: message,
-        showConfirmButton: false,
-        timer: 1500,
-    });
-}
-// if (flashSuccess.value) {
+// watch(flashSuccess, (newVal) => {
+//     console.log(" new val is " + newVal);
+//     if (newVal) {
+//         showAlertDialog(newVal);
+//     }
+// });
+
+// function showAlertDialog(message) {
 //     swal.fire({
 //         icon: "success",
-//         title: flashSuccess.value,
+//         title: message,
 //         showConfirmButton: false,
 //         timer: 1500,
 //     });
 // }
+if (flashSuccess.value) {
+    swal.fire({
+        icon: "success",
+        title: flashSuccess.value,
+        showConfirmButton: false,
+        timer: 1500,
+    });
+}
 </script>
 
 <!-- <style scoped>
