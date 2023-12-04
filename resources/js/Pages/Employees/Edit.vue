@@ -3,7 +3,10 @@
 
     <AuthenticatedLayout>
         <template #header> Employees </template>
-        <form @submit.prevent="update">
+        <form
+            @submit.prevent="update"
+            class="w-full max-w-screen-md mx-auto p-6 bg-gray-50 rounded-lg shadow-md"
+        >
             <div class="grid grid-cols-6 gap-4">
                 <div class="col-span-2">
                     <label class="label">First Name</label>
