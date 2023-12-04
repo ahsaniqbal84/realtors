@@ -12,13 +12,21 @@ use App\Models\EmployeeDesignation;
 
 class EmployeesController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $designations = EmployeeDesignation::all();
+        $teams = Team::all();
         $employees = Employee::join('employee_designations', 'employees.designation_id', '=', 'employee_designations.designation_id')
             ->leftJoin('teams', 'employees.team_id', '=', 'teams.team_id') 
             ->select('employees.*', 'employee_designations.name as designation_name','teams.name as team_name')
-            ->orderByDesc('employees.employee_id')
-            ->get();
-        return inertia::render('Employees/Index',['employees'=>$employees]);
+            ->orderByDesc('employees.created_at')
+            ->paginate(5)
+            ->withQueryString();
+        return inertia::render('Employees/Index',[
+            'employees'=>$employees,
+            'designations'=>$designations,
+            'teams'=>$teams,
+            'filters'=>$request->only(['name','code','status','designation','team','gender']),
+        ]);
     }
     public function store(Request $request){
         // Validate the incoming request data

@@ -15,7 +15,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(employee, index) in employees" :key="index">
+                <tr
+                    v-for="(employee, index) in employees"
+                    :key="index"
+                    class="bg-gray-50"
+                    :class="{ 'bg-red-200': employee.status === 0 }"
+                >
                     <td>{{ employee.employee_id }}</td>
                     <td>
                         <Link
