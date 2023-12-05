@@ -13,19 +13,43 @@ use App\Models\EmployeeDesignation;
 class EmployeesController extends Controller
 {
     public function index(Request $request){
+        $filters=$request->only(['name','code','status','designation','team','gender']);
         $designations = EmployeeDesignation::all();
         $teams = Team::all();
-        $employees = Employee::join('employee_designations', 'employees.designation_id', '=', 'employee_designations.designation_id')
-            ->leftJoin('teams', 'employees.team_id', '=', 'teams.team_id') 
-            ->select('employees.*', 'employee_designations.name as designation_name','teams.name as team_name')
-            ->orderByDesc('employees.created_at')
-            ->paginate(5)
+        $query=Employee::join('employee_designations', 'employees.designation_id', '=', 'employee_designations.designation_id')
+        ->leftJoin('teams', 'employees.team_id', '=', 'teams.team_id') 
+        ->select('employees.*', 'employee_designations.name as designation_name','teams.name as team_name')
+        ->orderByDesc('employees.created_at');
+        if($filters['name']??null){
+            $query->where('first_name',$filters['name'])
+                ->orWhere('last_name',$filters['name']);
+        }
+        if($filters['code']??null){
+            $query->where('code',$filters['code']);
+        }if($filters['gender']??null){
+            $query->where('gender',$filters['gender']);
+        }
+        if(isset($filters['status'])){
+            $query->where('status','=',$filters['status']);
+        }
+        if($filters['designation']??null){
+            $query->where('employees.designation_id',$filters['designation']);
+        }if(isset($filters['team'])){
+            if($filters['team']=="none"){
+                $query->where('employees.team_id',null);
+            }
+            else{
+            $query->where('employees.team_id',$filters['team']);
+            }
+        }
+        $employees = 
+            $query->paginate(5)
             ->withQueryString();
         return inertia::render('Employees/Index',[
             'employees'=>$employees,
             'designations'=>$designations,
             'teams'=>$teams,
-            'filters'=>$request->only(['name','code','status','designation','team','gender']),
+            'filters'=>$filters,
         ]);
     }
     public function store(Request $request){
@@ -123,7 +147,8 @@ public function update(Request $request, $id)
 
 public function destroy($id){
     $employee = Employee::find($id);
-    $employee->delete();
+    $employee->status=0;
+    $employee->save();
     return redirect()->route('employees.index')->with('success','Employee is deleted!');
 
 

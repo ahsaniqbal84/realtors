@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5 overflow-y-auto">
+    <div class="container overflow-y-auto">
         <table class="">
             <thead>
                 <tr>
@@ -46,11 +46,10 @@
                     <td>
                         <Link
                             class="text-purple-600 hover:text-purple-300"
-                            :href="
-                                route('employees.destroy', employee.employee_id)
+                            href="
+                               #
                             "
-                            method="DELETE"
-                            as="button"
+                            @click.prevent="handleLinkClick(employee)"
                         >
                             Delete
                         </Link>
@@ -62,54 +61,33 @@
 </template>
 
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage, useForm } from "@inertiajs/vue3";
+import { inject } from "vue";
 const props = defineProps(["employees"]);
+const swal = inject("$swal");
+const page = usePage();
+const form = useForm({
+    employeees_id: null,
+});
+const handleLinkClick = async (employee) => {
+    const result = await swal.fire({
+        title: "Are you sure?",
+        text:
+            "You are about to delete the employee " +
+            employee.first_name +
+            " " +
+            employee.last_name +
+            " !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel",
+    });
+    if (result.isConfirmed) {
+        form.delete(route("employees.destroy", employee.employee_id));
+        console.log("Employee deleted successfully");
+    }
+};
 </script>
-
-<style scoped>
-/* Add your styling here */
-
-/* table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow-x: scroll;
-}
-
-table th {
-    border-bottom: 2px solid #e2e8f0;
-    background-color: #edf2f7;
-    padding: 0.75rem 1.25rem;
-    text-align: left;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #718096;
-}
-
-table td {
-    border-bottom: 1px solid #e2e8f0;
-    background-color: #fcfcfc;
-    padding: 1rem 1.25rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: #4a5568;
-}
-
-table tr {
-    border-bottom: 1px solid #e2e8f0;
-    background-color: #f7fafc;
-    text-align: left;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: #4a5568;
-}
-
-.container {
-    display: inline-block;
-    min-width: 100%;
-    border-radius: 0.375rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 2px 4px -1px rgba(0, 0, 0, 0.06);
-} */
-</style>

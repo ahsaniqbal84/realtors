@@ -31,7 +31,7 @@
 
             <div class="flex flex-nowrap items-center">
                 <select
-                    class="input-filter-l w-44"
+                    class="input-filter-l w-40"
                     v-model="filterForm.designation"
                 >
                     <option :value="null">Designation</option>
@@ -42,8 +42,9 @@
                     >
                         {{ designation.name }}
                     </option></select
-                ><select class="input-filter-r w-44" v-model="filterForm.team">
+                ><select class="input-filter-r w-40" v-model="filterForm.team">
                     <option :value="null">Team</option>
+                    <option value="none">No Team</option>
                     <option
                         v-for="team in teams"
                         :key="team.team_id"
