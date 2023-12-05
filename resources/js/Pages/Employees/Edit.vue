@@ -8,7 +8,7 @@
             class="w-full max-w-screen-md mx-auto p-6 bg-gray-50 rounded-lg shadow-md"
         >
             <div class="grid grid-cols-6 gap-4">
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">First Name</label>
                     <input
                         type="text"
@@ -19,14 +19,14 @@
                         {{ form.errors.first_name }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">Last Name</label>
                     <input type="text" v-model="form.last_name" class="input" />
                     <div v-if="form.errors.last_name" class="input-error">
                         {{ form.errors.last_name }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">Gender</label>
                     <select v-model="form.gender" class="input">
                         <option value="m">Male</option>
@@ -36,14 +36,14 @@
                         {{ form.errors.gender }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">Employee Code</label>
                     <input type="text" v-model="form.code" class="input" />
                     <div v-if="form.errors.code" class="input-error">
                         {{ form.errors.code }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">Office</label>
                     <select v-model="form.office_id" class="input">
                         <option
@@ -58,7 +58,7 @@
                         {{ form.errors.office_id }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">Team</label>
                     <select v-model="form.team_id" class="input">
                         <option
@@ -74,7 +74,7 @@
                         {{ form.errors.team_id }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">Department</label>
                     <select v-model="form.department_id" class="input">
                         <option
@@ -89,7 +89,7 @@
                         {{ form.errors.department_id }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">Designation</label>
                     <select v-model="form.designation_id" class="input">
                         <option
@@ -104,7 +104,7 @@
                         {{ form.errors.designation_id }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">Mobile Number</label>
                     <input
                         type="text"
@@ -115,14 +115,14 @@
                         {{ form.errors.mobile_number }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">City</label>
                     <input type="text" v-model="form.city" class="input" />
                     <div v-if="form.errors.city" class="input-error">
                         {{ form.errors.city }}
                     </div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <label class="label">Status</label>
                     <select v-model="form.status" class="input">
                         <option value="1">Active</option>
@@ -132,7 +132,7 @@
                         {{ form.errors.status }}
                     </div>
                 </div>
-                <div class="col-span-6">
+                <div class="col-span-6 sm:col-span-3 md:col-span-2">
                     <button type="submit" class="btn-primary">Update</button>
                 </div>
             </div>

@@ -4,7 +4,7 @@
     <AuthenticatedLayout>
         <template #header> Teams </template>
 
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-gray-100 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 border-b border-gray-200">
                 Sample static text page
             </div>
