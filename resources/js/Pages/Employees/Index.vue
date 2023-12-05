@@ -5,7 +5,7 @@
         <template #header> Employees </template>
         <div>
             <Link
-                :href="route('employees.create')"
+                :href="route('employee.create')"
                 as="button"
                 class="btn-primary"
                 >Add Employee</Link

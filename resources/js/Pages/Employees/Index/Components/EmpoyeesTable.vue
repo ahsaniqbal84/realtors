@@ -24,9 +24,7 @@
                     <td>{{ employee.employee_id }}</td>
                     <td>
                         <Link
-                            :href="
-                                route('employees.edit', employee.employee_id)
-                            "
+                            :href="route('employee.edit', employee.employee_id)"
                             class="hover:text-purple-300 text-purple-600"
                             >{{ employee.first_name }}
                             {{ employee.last_name }}</Link
@@ -86,7 +84,7 @@ const handleLinkClick = async (employee) => {
         cancelButtonText: "Cancel",
     });
     if (result.isConfirmed) {
-        form.delete(route("employees.destroy", employee.employee_id));
+        form.delete(route("employee.destroy", employee.employee_id));
         console.log("Employee deleted successfully");
     }
 };

@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\EmployeesController;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,12 +41,15 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/employees', [EmployeesController::class, 'index'])->name('employees.index');
-Route::get('/employees/create', [EmployeesController::class, 'create'])->name('employees.create');
-Route::post('/employees', [EmployeesController::class, 'store'])->name('employees.store');
-Route::get('/employees/{id}/edit', [EmployeesController::class, 'edit'])->name('employees.edit');
-Route::put('/employees/{id}', [EmployeesController::class, 'update'])->name('employees.update');
-Route::delete('/employees/{id}',[EmployeesController::class,'destroy'])->name('employees.destroy');
+Route::resource('employee', EmployeeController::class)->except('show')->middleware(['auth', 'verified']);
+Route::resource('team', TeamController::class)->except('show')->middleware(['auth', 'verified']);
+
+// Route::get('/employees', [EmployeesController::class, 'index'])->name('employees.index');
+// Route::get('/employees/create', [EmployeesController::class, 'create'])->name('employees.create');
+// Route::post('/employees', [EmployeesController::class, 'store'])->name('employees.store');
+// Route::get('/employees/{id}/edit', [EmployeesController::class, 'edit'])->name('employees.edit');
+// Route::put('/employees/{id}', [EmployeesController::class, 'update'])->name('employees.update');
+// Route::delete('/employees/{id}',[EmployeesController::class,'destroy'])->name('employees.destroy');
 
 
 

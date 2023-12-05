@@ -7,12 +7,17 @@ use Inertia\Inertia;
 use App\Models\Office;
 use App\Models\Employee;
 use App\Models\Department;
-use Illuminate\Http\Request;
 use App\Models\EmployeeDesignation;
 
-class EmployeesController extends Controller
+use Illuminate\Http\Request;
+
+class EmployeeController extends Controller
 {
-    public function index(Request $request){
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
         $filters=$request->only(['name','code','status','designation','team','gender']);
         $designations = EmployeeDesignation::all();
         $teams = Team::all();
@@ -52,8 +57,31 @@ class EmployeesController extends Controller
             'filters'=>$filters,
         ]);
     }
-    public function store(Request $request){
-        // Validate the incoming request data
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $offices = Office::all();
+        $departments = Department::all();
+        $designations = EmployeeDesignation::all();
+        $teams = Team::all();
+
+        return inertia::render('Employees/Create',[
+            'offices' => $offices,
+            'departments' => $departments,
+            'designations' => $designations,
+            'teams' => $teams,
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+         // Validate the incoming request data
     $request->validate([
         // Add validation rules for other fields
         'first_name' => 'required',
@@ -89,24 +117,22 @@ class EmployeesController extends Controller
 
     // You can add a success message or redirect to another page if needed
 
-    return redirect()->route('employee.index')->with('success','Employee is Created!');
-    }
-    public function create(){
-        $offices = Office::all();
-        $departments = Department::all();
-        $designations = EmployeeDesignation::all();
-        $teams = Team::all();
-
-        return inertia::render('Employees/Create',[
-            'offices' => $offices,
-            'departments' => $departments,
-            'designations' => $designations,
-            'teams' => $teams,
-        ]);
+    return redirect()->route('employees.index')->with('success','Employee is Created!');
     }
 
-    public function edit($id)
-{
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
         $employee = Employee::where('employee_id', $id)->first();
         $offices = Office::all();
         $departments = Department::all();
@@ -120,11 +146,14 @@ class EmployeesController extends Controller
         'designations' => $designations,
         'teams' => $teams,
     ]);
-}
+    }
 
-public function update(Request $request, $id)
-{
-    $employee = Employee::where('employee_id',$id)->first();
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $employee = Employee::where('employee_id',$id)->first();
 
     $employee->update(
         $request->validate([
@@ -142,15 +171,17 @@ public function update(Request $request, $id)
         ])
     );
 
-    return redirect()->route('employee.index')->with('success','Employee is updated!');
-}
+    return redirect()->route('employees.index')->with('success','Employee is updated!');
+    }
 
-public function destroy($id){
-    $employee = Employee::find($id);
-    $employee->status=0;
-    $employee->save();
-    return redirect()->route('employee.index')->with('success','Employee is deleted!');
-
-
-}
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        $employee = Employee::find($id);
+        $employee->status=0;
+        $employee->save();
+        return redirect()->route('employees.index')->with('success','Employee is deleted!');
+    }
 }
