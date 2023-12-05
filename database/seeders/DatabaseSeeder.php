@@ -55,18 +55,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Zonal Manager', 'commission'=>2.5 , 'target'=>10_000_000],
         ]);
 
-        DB::table('employees')->insert([
-            ['first_name' => 'employee', 'last_name'=>'1', 'gender'=>'m','code'=>112233,'office_id'=>1,'department_id'=>1,'designation_id'=>1,'mobile_number'=>'123123123','city'=>'islamabad', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'2', 'gender'=>'f','code'=>11223,'office_id'=>1,'department_id'=>2,'designation_id'=>3,'mobile_number'=>'123122388','city'=>'peshawar', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'3', 'gender'=>'f','code'=>1122,'office_id'=>2,'department_id'=>1,'designation_id'=>2,'mobile_number'=>'123123199','city'=>'islamabad', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'4', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'5', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'6', 'gender'=>'f','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'7', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'8', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
-            ['first_name' => 'employee', 'last_name'=>'9', 'gender'=>'m','code'=>112,'office_id'=>1,'department_id'=>3,'designation_id'=>1,'mobile_number'=>'123123166','city'=>'peshawar', 'status'=>true],
-
-        ]);
+        \App\Models\Employee::factory(20)->create();
 
         DB::table('customers')->insert([
             ['first_name' => 'test','last_name'=>'customer','cnic'=>'1234567891011','address'=>'from islamabad','employee_id'=>1,'status'=>true]
@@ -88,5 +77,23 @@ class DatabaseSeeder extends Seeder
             ['name'=>'Qalandar','bcm_id'=>2,],
             ['name'=>'united','bcm_id'=>2,],
         ]);
+
+        $this->updateEmployeesWithRandomTeamId();
+    }
+
+    private function updateEmployeesWithRandomTeamId(): void
+    {
+        $employees = \App\Models\Employee::all();
+
+        foreach ($employees as $employee) {
+            $randomNumber = random_int(1, 10); 
+
+            if ($randomNumber <= 5) {
+                $randomTeamId = random_int(1, 5);
+                $employee->update(['team_id' => $randomTeamId]);
+            } else {
+                $employee->update(['team_id' => null]);
+            }
+        }
     }
 }
