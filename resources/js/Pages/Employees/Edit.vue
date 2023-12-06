@@ -132,7 +132,7 @@
                         {{ form.errors.status }}
                     </div>
                 </div>
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6">
                     <button type="submit" class="btn-primary">Update</button>
                 </div>
             </div>
@@ -167,7 +167,7 @@ const form = useForm({
 });
 
 const update = () =>
-    form.put(route("employees.update", { id: props.employee.employee_id }));
+    form.put(route("employee.update", { id: props.employee.employee_id }));
 </script>
 
 <style scope>

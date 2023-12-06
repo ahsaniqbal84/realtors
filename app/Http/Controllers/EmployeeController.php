@@ -117,7 +117,7 @@ class EmployeeController extends Controller
 
     // You can add a success message or redirect to another page if needed
 
-    return redirect()->route('employees.index')->with('success','Employee is Created!');
+    return redirect()->route('employee.index')->with('success','Employee is Created!');
     }
 
     /**
@@ -171,7 +171,7 @@ class EmployeeController extends Controller
         ])
     );
 
-    return redirect()->route('employees.index')->with('success','Employee is updated!');
+    return redirect()->route('employee.index')->with('success','Employee is updated!');
     }
 
     /**
@@ -182,6 +182,6 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         $employee->status=0;
         $employee->save();
-        return redirect()->route('employees.index')->with('success','Employee is deleted!');
+        return redirect()->route('employee.index')->with('success','Employee is deleted!');
     }
 }

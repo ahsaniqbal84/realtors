@@ -55,8 +55,19 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn-primary">Filter</button>
-            <button type="reset" @click="reset">Clear</button>
+            <button
+                type="submit"
+                class="btn-primary w-full sm:w-full md:w-12 lg:w-auto"
+            >
+                Filter
+            </button>
+            <button
+                type="reset"
+                @click="reset"
+                class="w-full sm:w-full md:w-12 lg:w-auto"
+            >
+                Clear
+            </button>
         </div>
     </form>
 </template>
@@ -80,7 +91,7 @@ const filterForm = useForm({
 });
 
 const filter = () => {
-    filterForm.get(route("employees.index"), {
+    filterForm.get(route("employee.index"), {
         preserveState: true,
         preserveScroll: true,
     });
