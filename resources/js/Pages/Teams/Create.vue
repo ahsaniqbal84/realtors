@@ -41,9 +41,10 @@
                     class="col-span-6 sm:col-span-3 md:col-span-3"
                 >
                     <label class="label">Zm</label>
-                    <select v-model="form.zm" class="input">
+                    <!-- <select v-model="form.zm" class="input">
                         <option :value="form.zm">{{ form.zm }}</option>
-                    </select>
+                    </select> -->
+                    <input v-model="form.zm" class="input" readonly />
                     <div v-if="form.errors.status" class="input-error">
                         {{ form.errors.status }}
                     </div>
