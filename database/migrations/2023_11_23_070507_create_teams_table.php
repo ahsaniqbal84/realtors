@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id('team_id');
-            $table->foreignId('bcm_id');
+            $table->foreignId('bcm_id')->nullable()->default(null);
             $table->char('name',100);
             $table->unsignedBigInteger('created_by')->nullable()->default(null);
             $table->unsignedBigInteger('update_by')->nullable()->default(null);

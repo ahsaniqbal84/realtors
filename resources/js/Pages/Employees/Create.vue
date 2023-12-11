@@ -7,7 +7,7 @@
             class="w-full max-w-screen-md mx-auto p-6 bg-gray-50 rounded-lg shadow-md"
         >
             <div class="grid grid-cols-6 gap-4">
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">First Name</label>
                     <input
                         type="text"
@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Last Name</label>
                     <input type="text" v-model="form.last_name" class="input" />
                     <div v-if="form.errors.last_name" class="input-error">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Gender</label>
                     <select v-model="form.gender" class="input">
                         <option value="m">Male</option>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Employee Code</label>
                     <input type="text" v-model="form.code" class="input" />
                     <div v-if="form.errors.code" class="input-error">
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Office</label>
                     <select v-model="form.office_id" class="input">
                         <option
@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Team</label>
                     <select v-model="form.team_id" class="input">
                         <option
@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Department</label>
                     <select v-model="form.department_id" class="input">
                         <option
@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Designation</label>
                     <select v-model="form.designation_id" class="input">
                         <option
@@ -111,7 +111,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Mobile Number</label>
                     <input
                         type="text"
@@ -123,7 +123,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">City</label>
                     <input type="text" v-model="form.city" class="input" />
                     <div v-if="form.errors.city" class="input-error">
@@ -131,7 +131,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-2">
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Status</label>
                     <select v-model="form.status" class="input">
                         <option value="1">Active</option>
@@ -175,7 +175,7 @@ defineProps({
     teams: Object,
 });
 
-const create = () => form.post(route("employees.store"));
+const create = () => form.post(route("employee.store"));
 </script>
 
 <style scope>

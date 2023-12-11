@@ -3,16 +3,32 @@
 
     <AuthenticatedLayout>
         <template #header> Teams </template>
+        <div>
+            <Link
+                :href="route('team.create')"
+                as="button"
+                class="btn-primary mb-4"
+                >Add Team</Link
+            >
+        </div>
 
-        <div class="bg-gray-100 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 border-b border-gray-200">
-                Sample static text page
-            </div>
+        <TeamTable :teams="teams.data"></TeamTable>
+        <div
+            v-if="teams.data.length"
+            class="w-full flex justify-center mt-8 mb-8"
+        >
+            <Pagination :links="teams.links"></Pagination>
         </div>
     </AuthenticatedLayout>
 </template>
 
 <script setup>
+import { Link } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import TeamTable from "@/Pages/Teams/Index/Components/TeamTable.vue";
+import Pagination from "@/Components/Pagination.vue";
 import { Head } from "@inertiajs/vue3";
+defineProps({
+    teams: Object,
+});
 </script>
