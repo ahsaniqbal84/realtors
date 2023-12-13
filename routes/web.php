@@ -2,7 +2,9 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ZmController;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\BcmController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
@@ -43,6 +45,8 @@ Route::get('/dashboard', function () {
 
 Route::resource('employee', EmployeeController::class)->except('show')->middleware(['auth', 'verified']);
 Route::resource('team', TeamController::class)->middleware(['auth', 'verified']);
+Route::resource('bcm', BcmController::class)->middleware(['auth', 'verified']);
+Route::resource('zm', ZmController::class)->middleware(['auth', 'verified']);
 
 // Route::get('/employees', [EmployeesController::class, 'index'])->name('employees.index');
 // Route::get('/employees/create', [EmployeesController::class, 'create'])->name('employees.create');
