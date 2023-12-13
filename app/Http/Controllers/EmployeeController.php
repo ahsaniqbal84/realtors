@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Zm;
 use App\Models\Team;
 use Inertia\Inertia;
 use App\Models\Office;
 use App\Models\Employee;
 use App\Models\Department;
-use App\Models\EmployeeDesignation;
 
 use Illuminate\Http\Request;
+use App\Models\EmployeeDesignation;
 
 class EmployeeController extends Controller
 {
@@ -67,12 +68,20 @@ class EmployeeController extends Controller
         $departments = Department::all();
         $designations = EmployeeDesignation::all();
         $teams = Team::all();
+        $zms = Zm::leftJoin('employees as zm_employee', 'zm_employee.employee_id', '=', 'zms.employee_id')
+        ->select(
+            'zms.*',
+            'zm_employee.first_name as zm_first_name',
+            'zm_employee.last_name as zm_last_name'
+        )
+        ->get();
 
         return inertia::render('Employees/Create',[
             'offices' => $offices,
             'departments' => $departments,
             'designations' => $designations,
             'teams' => $teams,
+            'zms' =>$zms,
         ]);
     }
 
@@ -82,6 +91,8 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
          // Validate the incoming request data
+    dd($request->input('zm_id'));
+
     $request->validate([
         // Add validation rules for other fields
         'first_name' => 'required',
@@ -96,8 +107,10 @@ class EmployeeController extends Controller
         'city' => 'required',
         'status' => 'required',
     ]);
-
     // Create a new employee
+    if($request->input('designation_id')==4){
+        
+    }
     $employee = new Employee([
         'first_name' => $request->input('first_name'),
         'last_name' => $request->input('last_name'),

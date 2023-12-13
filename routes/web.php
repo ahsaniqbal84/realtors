@@ -42,7 +42,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('employee', EmployeeController::class)->except('show')->middleware(['auth', 'verified']);
-Route::resource('team', TeamController::class)->except('show')->middleware(['auth', 'verified']);
+Route::resource('team', TeamController::class)->middleware(['auth', 'verified']);
 
 // Route::get('/employees', [EmployeesController::class, 'index'])->name('employees.index');
 // Route::get('/employees/create', [EmployeesController::class, 'create'])->name('employees.create');

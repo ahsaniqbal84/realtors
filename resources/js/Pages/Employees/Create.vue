@@ -110,6 +110,24 @@
                         {{ form.errors.designation_id }}
                     </div>
                 </div>
+                <div
+                    v-if="form.designation_id == 4"
+                    class="col-span-6 sm:col-span-3 md:col-span-3"
+                >
+                    <label class="label">Zonal Manager</label>
+                    <select v-model="form.zm_id" class="input">
+                        <option
+                            v-for="zm in zms"
+                            :key="zm.zm_id"
+                            :value="zm.zm_id"
+                        >
+                            {{ zm.zm_first_name }} {{ zm.zm_last_name }}
+                        </option>
+                    </select>
+                    <div v-if="form.errors.designation_id" class="input-error">
+                        {{ form.errors.designation_id }}
+                    </div>
+                </div>
 
                 <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Mobile Number</label>
@@ -162,6 +180,7 @@ const form = useForm({
     code: null,
     office_id: null,
     team_id: null,
+    zm_id: null,
     department_id: null,
     designation_id: null,
     mobile_number: null,
@@ -173,6 +192,7 @@ defineProps({
     departments: Object,
     designations: Object,
     teams: Object,
+    zms: Object,
 });
 
 const create = () => form.post(route("employee.store"));

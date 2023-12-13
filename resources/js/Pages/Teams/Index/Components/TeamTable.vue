@@ -6,7 +6,7 @@
                     <th class="">Serial Number</th>
                     <th>Name</th>
                     <th>bcm</th>
-                    <!-- <th>Action</th> -->
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,17 +30,14 @@
                                 : "None"
                         }}
                     </td>
-                    <!-- <td>
+                    <td>
                         <Link
                             class="text-purple-600 hover:text-purple-300"
-                            href="
-                               #
-                            "
-                            @click.prevent="handleLinkClick(team)"
+                            :href="route('team.show', team.team_id)"
                         >
-                            Delete
+                            Team Detail
                         </Link>
-                    </td> -->
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -57,19 +54,6 @@ const form = useForm({
     employeees_id: null,
 });
 const handleLinkClick = async (team) => {
-    const result = await swal.fire({
-        title: "Are you sure?",
-        text: "You are about to delete the team " + team.name + " !",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "Cancel",
-    });
-    if (result.isConfirmed) {
-        form.delete(route("team.destroy", team.team_id));
-        console.log("Team deleted successfully");
-    }
+    form.get(route("team.show", team.team_id));
 };
 </script>

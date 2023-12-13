@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Zm extends Model
 {
     use HasFactory;
+    protected $primaryKey = "zm_id";
     protected $fillable=['employee_id'];
 
     public function bcms(){

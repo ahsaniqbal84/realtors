@@ -27,7 +27,8 @@
                             :key="bcm.bcm_id"
                             :value="bcm.bcm_id"
                         >
-                            {{ bcm.first_name }} {{ bcm.last_name }}
+                            {{ bcm.first_name }} {{ bcm.last_name }} BCM-
+                            {{ bcm.bcm_id }}
                         </option>
                         <option :value="null">None</option>
                     </select>

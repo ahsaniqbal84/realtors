@@ -11,6 +11,7 @@ class EmployeeDesignation extends Model
     protected $fillable = [
         'name','commission','target'
     ];
+    protected $primaryKey = 'designation_id';
 
     public function employees()
     {
