@@ -73,7 +73,11 @@
 
             <nav-link
                 :href="route('employee.index')"
-                :active="route().current('employee.index')"
+                :active="
+                    route().current('employee.index') ||
+                    route().current('employee.create') ||
+                    route().current('employee.edit')
+                "
             >
                 <template #icon>
                     <svg
@@ -240,8 +244,21 @@ import { ref, computed } from "vue";
 let showingTwoLevelMenu = ref(false);
 
 const isTeamManagementActive = computed(() => {
-    const teamRoutes = ["team.index", "team.create", "team.edit", "team.show"];
-    return teamRoutes.some((routeName) => route().current(routeName));
+    const teamManagementRoutes = [
+        "team.index",
+        "team.create",
+        "team.edit",
+        "team.show",
+        "bcm.index",
+        "bcm.create",
+        "bcm.edit",
+        "bcm.show",
+        "zm.index",
+        "zm.create",
+        "zm.edit",
+        "zm.show",
+    ];
+    return teamManagementRoutes.some((routeName) => route().current(routeName));
 });
 </script>
 
