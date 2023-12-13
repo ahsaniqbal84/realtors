@@ -54,7 +54,7 @@
                                 >
                                 -
                                 <span class="text-gray-700">{{
-                                    member.designation
+                                    member.designation.name
                                 }}</span>
                                 <!-- Add other member details here -->
                             </div>

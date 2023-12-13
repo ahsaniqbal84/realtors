@@ -27,7 +27,8 @@
                             :key="bcm.bcm_id"
                             :value="bcm.bcm_id"
                         >
-                            {{ bcm.first_name }} {{ bcm.last_name }} BCM-
+                            {{ bcm.employee.first_name }}
+                            {{ bcm.employee.last_name }} BCM-
                             {{ bcm.bcm_id }}
                         </option>
                         <option :value="null">None</option>
@@ -86,9 +87,9 @@ const updateZMs = async (bcmId) => {
         // Check if the selected bcm exists and has a zm_id
         if (selectedBcm && selectedBcm.zm_id) {
             form.zm =
-                selectedBcm.zonal_manager_first_name +
+                selectedBcm.zm.employee.first_name +
                 " " +
-                selectedBcm.zonal_manager_last_name;
+                selectedBcm.zm.employee.last_name;
         } else {
             form.zm = null;
         }

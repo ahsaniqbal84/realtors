@@ -25,8 +25,10 @@
                     </td>
                     <td>
                         {{
-                            team.first_name
-                                ? team.first_name + " " + team.last_name
+                            team.bcm
+                                ? team.bcm.employee.first_name +
+                                  " " +
+                                  team.bcm.employee.last_name
                                 : "None"
                         }}
                     </td>
