@@ -5,7 +5,7 @@
         <template #header> Users </template>
 
         <div
-            class="mb-4 inline-flex w-full overflow-hidden rounded-lg bg-white shadow-md"
+            class="mb-4 inline-flex w-full overflow-hidden rounded-lg bg-gray-50 shadow-md"
         >
             <div class="flex w-12 items-center justify-center bg-blue-500">
                 <svg
@@ -43,6 +43,11 @@
                         >
                             Email
                         </th>
+                        <th
+                            class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+                        >
+                            Role
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,6 +68,13 @@
                         >
                             <p class="text-gray-900 whitespace-no-wrap">
                                 {{ user.email }}
+                            </p>
+                        </td>
+                        <td
+                            class="border-b border-gray-200 bg-white px-5 py-5 text-sm"
+                        >
+                            <p class="text-gray-900 whitespace-no-wrap">
+                                {{ user.role.name }}
                             </p>
                         </td>
                     </tr>
