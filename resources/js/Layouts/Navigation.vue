@@ -126,7 +126,7 @@
                             17.7-14.3 32-32 32H288c-17.7 0-32-14.3-32-32V405.2c-37.8-18-64-56.5-64-101.2c0-61.9 50.1-112 112-112h32c61.9 0 112 50.1 112 112z"
                     />
                 </svg>
-                <span class="mx-3">TeamManagement</span>
+                <span class="mx-3">Team Management</span>
             </a>
 
             <!-- ... (existing code) ... -->
