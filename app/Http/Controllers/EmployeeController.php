@@ -20,7 +20,7 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $filters=$request->only(['name','code','status','designation','team','gender']);
-        $designations = EmployeeDesignation::all();
+        $designations = EmployeeDesignation::query()->limit(EmployeeDesignation::count()-2)->get();
         $teams = Team::all();
         $query=Employee::join('employee_designations', 'employees.designation_id', '=', 'employee_designations.designation_id')
         ->leftJoin('teams', 'employees.team_id', '=', 'teams.team_id') 
@@ -48,6 +48,9 @@ class EmployeeController extends Controller
             $query->where('employees.team_id',$filters['team']);
             }
         }
+
+        $lastTwoDesignationIds = EmployeeDesignation::latest('designation_id')->limit(2)->pluck('designation_id');
+        $query->whereNotIn('employees.designation_id', $lastTwoDesignationIds);
         $employees = 
             $query->paginate(8)
             ->withQueryString();
@@ -66,7 +69,7 @@ class EmployeeController extends Controller
     {
         $offices = Office::all();
         $departments = Department::all();
-        $designations = EmployeeDesignation::all();
+        $designations = EmployeeDesignation::query()->limit(EmployeeDesignation::count()-2)->get();
         $teams = Team::all();
         $zms = Zm::leftJoin('employees as zm_employee', 'zm_employee.employee_id', '=', 'zms.employee_id')
         ->select(
@@ -149,7 +152,7 @@ class EmployeeController extends Controller
         $employee = Employee::where('employee_id', $id)->first();
         $offices = Office::all();
         $departments = Department::all();
-        $designations = EmployeeDesignation::all();
+        $designations = EmployeeDesignation::query()->limit(EmployeeDesignation::count()-2)->get();
         $teams = Team::all();
 
 

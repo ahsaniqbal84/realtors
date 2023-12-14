@@ -2,7 +2,7 @@
     <Head title="Employees/Edit" />
 
     <AuthenticatedLayout>
-        <template #header> Employees </template>
+        <template #header> Employees/Edit </template>
         <form
             @submit.prevent="update"
             class="w-full max-w-screen-md mx-auto p-6 bg-gray-50 rounded-lg shadow-md"

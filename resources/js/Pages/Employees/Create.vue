@@ -2,6 +2,7 @@
     <Head title="Employees/create" />
 
     <AuthenticatedLayout>
+        <template #header> Employees/Create </template>
         <form
             @submit.prevent="create"
             class="w-full max-w-screen-md mx-auto p-6 bg-gray-50 rounded-lg shadow-md"
@@ -110,25 +111,6 @@
                         {{ form.errors.designation_id }}
                     </div>
                 </div>
-                <div
-                    v-if="form.designation_id == 4"
-                    class="col-span-6 sm:col-span-3 md:col-span-3"
-                >
-                    <label class="label">Zonal Manager</label>
-                    <select v-model="form.zm_id" class="input">
-                        <option
-                            v-for="zm in zms"
-                            :key="zm.zm_id"
-                            :value="zm.zm_id"
-                        >
-                            {{ zm.zm_first_name }} {{ zm.zm_last_name }}
-                        </option>
-                    </select>
-                    <div v-if="form.errors.designation_id" class="input-error">
-                        {{ form.errors.designation_id }}
-                    </div>
-                </div>
-
                 <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Mobile Number</label>
                     <input
