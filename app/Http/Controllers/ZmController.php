@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Zm;
 use Inertia\Inertia;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class ZmController extends Controller
@@ -22,7 +23,12 @@ class ZmController extends Controller
      */
     public function create()
     {
-        //
+        $zms = Employee::with('designation')->whereHas('designation', function ($query) {
+            $query->where('designation_id', 5);
+        })->whereDoesntHave('zm')->get();
+
+        return Inertia::render('Zms/Create',['zms'=>$zms]);
+
     }
 
     /**
@@ -30,7 +36,16 @@ class ZmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required',
+        ]);
+        $employee = Employee::find($request->input('employee_id'));
+        $employee->update(['designation_id' => 5]);
+
+        Zm::create([
+            'employee_id' => $request->input('employee_id'),
+        ]);
+        return redirect()->route('zm.index')->with('success','Zonal Manager is Created!');
     }
 
     /**
@@ -38,7 +53,8 @@ class ZmController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $zm = Zm::with('bcms.employee','employee')->find($id);
+        return Inertia::render('Zms/Show',['zm'=>$zm]);
     }
 
     /**
@@ -46,15 +62,26 @@ class ZmController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $current_zm=Zm::find($id);
+        $zms = Employee::with('designation')->whereHas('designation', function ($query) {
+            $query->where('designation_id', 5);
+        })
+        ->whereDoesntHave('zm')
+        ->orWhere('employee_id',$current_zm->employee_id)->get();
+
+        return Inertia::render('Zms/Edit',['zms'=>$zms,'currentZm'=>$current_zm]);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Zm $zm)
     {
-        //
+        $zm->employee_id = $request->input('employee_id');
+        $zm->save();
+        return redirect()->route('zm.index')->with('success','Zm is Updated!');
+
     }
 
     /**

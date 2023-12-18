@@ -20,8 +20,14 @@
                             {{ zm.employee.last_name }}</Link
                         >
                     </td>
-                    <td>{{ formatCreatedAt(zm.created_at) }}</td>
-                    <td>Zm Detail</td>
+                    <td>{{ new Date(zm.created_at).toLocaleDateString() }}</td>
+                    <td>
+                        <Link
+                            :href="route('zm.show', zm.zm_id)"
+                            class="hover:text-purple-300 text-purple-600"
+                            >View Detail</Link
+                        >
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -29,19 +35,6 @@
 </template>
 
 <script setup>
-import { Link, usePage, useForm } from "@inertiajs/vue3";
-import { inject } from "vue";
-const props = defineProps(["zms"]);
-const swal = inject("$swal");
-const page = usePage();
-const form = useForm({
-    employeees_id: null,
-});
-const formatCreatedAt = (createdAt) => {
-    const date = new Date(createdAt);
-    return date.toLocaleDateString();
-};
-const handleLinkClick = async (team) => {
-    form.get(route("team.show", team.team_id));
-};
+import { Link } from "@inertiajs/vue3";
+defineProps(["zms"]);
 </script>

@@ -42,15 +42,6 @@
 </template>
 
 <script setup>
-import { Link, usePage, useForm } from "@inertiajs/vue3";
-import { inject } from "vue";
-const props = defineProps(["bcms"]);
-const swal = inject("$swal");
-const page = usePage();
-const form = useForm({
-    employeees_id: null,
-});
-const handleLinkClick = async (team) => {
-    form.get(route("team.show", team.team_id));
-};
+import { Link } from "@inertiajs/vue3";
+defineProps(["bcms"]);
 </script>

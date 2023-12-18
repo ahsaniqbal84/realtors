@@ -2,7 +2,7 @@
     <Head title="Teams" />
 
     <AuthenticatedLayout>
-        <template #header> Team Detail </template>
+        <template #header> BCM - {{ bcm.bcm_id }} Detail </template>
         <div class="max-w-3xl mx-auto p-4">
             <div class="bg-gray-50 rounded-lg shadow-md p-6">
                 <!-- ZM Details -->
@@ -24,7 +24,7 @@
                 <!-- BCM Details -->
                 <div class="mb-6">
                     <h2 class="text-xl font-semibold mb-2">
-                        Branch Channel Manager
+                        Branch center Manager
                     </h2>
                     <div class="flex items-center">
                         <div class="flex-shrink-0 h-8 w-8 mr-2">

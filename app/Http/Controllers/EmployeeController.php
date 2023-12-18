@@ -94,7 +94,6 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
          // Validate the incoming request data
-    dd($request->input('zm_id'));
 
     $request->validate([
         // Add validation rules for other fields

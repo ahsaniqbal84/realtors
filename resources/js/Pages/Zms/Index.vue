@@ -5,7 +5,7 @@
         <template #header> Zonal managers </template>
         <div>
             <Link
-                :href="route('team.create')"
+                :href="route('zm.create')"
                 as="button"
                 class="btn-primary mb-4"
                 >Add ZM</Link

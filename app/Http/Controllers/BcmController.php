@@ -42,8 +42,6 @@ class BcmController extends Controller
             'employee_id' => 'required',
             'zm_id'=>'required',
         ]);
-        $employee = Employee::find($request->input('employee_id'));
-        $employee->update(['designation_id' => 4]);
 
         Bcm::create([
             'employee_id' => $request->input('employee_id'),
