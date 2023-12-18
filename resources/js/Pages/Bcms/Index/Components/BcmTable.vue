@@ -28,7 +28,13 @@
                         {{ bcm.zm.employee.first_name }}
                         {{ bcm.zm.employee.last_name }}
                     </td>
-                    <td>Bcm Detail</td>
+                    <td>
+                        <Link
+                            :href="route('bcm.show', bcm.bcm_id)"
+                            class="hover:text-purple-300 text-purple-600"
+                            >View Detail</Link
+                        >
+                    </td>
                 </tr>
             </tbody>
         </table>

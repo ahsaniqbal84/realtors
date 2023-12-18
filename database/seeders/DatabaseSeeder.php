@@ -45,13 +45,15 @@ class DatabaseSeeder extends Seeder
         DB::table('offices')->insert([
             ['name' => 'Peshaware office', 'address' => ' in peshaware','city' => 'peshawar','status' => true ],
             ['name' => 'Islamabad office', 'address' => ' in islamabad','city' => 'islamabad','status' => true],
+            ['name' => 'Kohat office', 'address' => ' in Kohat','city' => 'Kohat','status' => true],
+            ['name' => 'Lahore office', 'address' => ' in Lahore','city' => 'Lahore','status' => true],
         ]);
 
         DB::table('employee_designations')->insert([
             ['name' => 'Investment Advisor', 'commission'=>2.5 , 'target'=>3_000_000],
             ['name' => 'Team Lead', 'commission'=>2.5 , 'target'=>4_000_000],
             ['name' => 'Branch Manager', 'commission'=>2.5 , 'target'=>4_000_000],
-            ['name' => 'Bcm', 'commission'=>2.5, 'target'=>6_000_000],
+            ['name' => 'Bussiness Center Manager', 'commission'=>2.5, 'target'=>6_000_000],
             ['name' => 'Zonal Manager', 'commission'=>2.5 , 'target'=>10_000_000],
         ]);
 
@@ -71,11 +73,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('teams')->insert([
-            ['name'=>'Hawk','bcm_id'=>1,],
-            ['name'=>'Falcon','bcm_id'=>1,],
-            ['name'=>'Gladiator','bcm_id'=>1,],
-            ['name'=>'Qalandar','bcm_id'=>2,],
-            ['name'=>'united','bcm_id'=>2,],
+            ['name'=>'Hawk','office_id'=>1,'bcm_id'=>1,],
+            ['name'=>'Falcon','office_id'=>2,'bcm_id'=>1,],
+            ['name'=>'Gladiator','office_id'=>3,'bcm_id'=>1,],
+            ['name'=>'Qalandar','office_id'=>2,'bcm_id'=>2,],
+            ['name'=>'united','office_id'=>3,'bcm_id'=>2,],
         ]);
 
         $this->updateEmployeesWithRandomTeamId();

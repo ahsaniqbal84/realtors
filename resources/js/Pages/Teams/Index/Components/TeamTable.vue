@@ -5,7 +5,8 @@
                 <tr>
                     <th class="">Serial Number</th>
                     <th>Name</th>
-                    <th>bcm</th>
+                    <th>BCM</th>
+                    <th>Office</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -31,6 +32,9 @@
                                   team.bcm.employee.last_name
                                 : "None"
                         }}
+                    </td>
+                    <td>
+                        {{ team.office.name }}
                     </td>
                     <td>
                         <Link

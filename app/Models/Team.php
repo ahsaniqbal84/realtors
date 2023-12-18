@@ -9,7 +9,7 @@ class Team extends Model
 {
     use HasFactory;
     protected $primaryKey = 'team_id';
-    protected $fillable=['name','bcm_id','created_by','update_by'];
+    protected $fillable=['name','bcm_id','office_id','created_by','update_by'];
 
     public function employees(){
         return $this->hasMany(Employee::class,'team_id');
@@ -21,6 +21,10 @@ class Team extends Model
 
     public function bcm(){
         return $this->belongsTo(Bcm::class,'bcm_id');
+    }
+
+    public function office(){
+        return $this->belongsTo(Office::class,'office_id');
     }
 
 }

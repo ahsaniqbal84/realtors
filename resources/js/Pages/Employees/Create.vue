@@ -46,10 +46,32 @@
                         {{ form.errors.code }}
                     </div>
                 </div>
+                <div
+                    class="col-span-6 sm:col-span-3 md:col-span-3"
+                    @change="updateTeamOnDesignation(form.designation_id)"
+                >
+                    <label class="label">Designation</label>
+                    <select v-model="form.designation_id" class="input">
+                        <option
+                            v-for="designation in designations"
+                            :key="designation.designation_id"
+                            :value="designation.designation_id"
+                        >
+                            {{ designation.name }}
+                        </option>
+                    </select>
+                    <div v-if="form.errors.designation_id" class="input-error">
+                        {{ form.errors.designation_id }}
+                    </div>
+                </div>
 
                 <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Office</label>
-                    <select v-model="form.office_id" class="input">
+                    <select
+                        v-model="form.office_id"
+                        class="input"
+                        @change="updateTeams(form.office_id)"
+                    >
                         <option
                             v-for="office in offices"
                             :key="office.office_id"
@@ -63,11 +85,16 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-3">
+                <div
+                    class="col-span-6 sm:col-span-3 md:col-span-3"
+                    v-if="
+                        form.designation_id !== 4 && form.designation_id !== 5
+                    "
+                >
                     <label class="label">Team</label>
                     <select v-model="form.team_id" class="input">
                         <option
-                            v-for="team in teams"
+                            v-for="team in filteredTeams"
                             :key="team.team_id"
                             :value="team.team_id"
                         >
@@ -96,21 +123,6 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 md:col-span-3">
-                    <label class="label">Designation</label>
-                    <select v-model="form.designation_id" class="input">
-                        <option
-                            v-for="designation in designations"
-                            :key="designation.designation_id"
-                            :value="designation.designation_id"
-                        >
-                            {{ designation.name }}
-                        </option>
-                    </select>
-                    <div v-if="form.errors.designation_id" class="input-error">
-                        {{ form.errors.designation_id }}
-                    </div>
-                </div>
                 <div class="col-span-6 sm:col-span-3 md:col-span-3">
                     <label class="label">Mobile Number</label>
                     <input
@@ -150,7 +162,7 @@
     </AuthenticatedLayout>
 </template>
 <script setup>
-import { reactive } from "vue";
+import { ref } from "vue";
 //import { useForm } from "@inertiajs/inertia-vue3";
 import { useForm } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
@@ -169,7 +181,7 @@ const form = useForm({
     status: 1,
     city: null,
 });
-defineProps({
+const props = defineProps({
     offices: Object,
     departments: Object,
     designations: Object,
@@ -177,7 +189,25 @@ defineProps({
     zms: Object,
 });
 
+const filteredTeams = ref([]);
+
 const create = () => form.post(route("employee.store"));
+
+const updateTeams = (officeId) => {
+    console.log(officeId);
+    // Find the corresponding bcm in the list
+    filteredTeams.value = props.teams.filter(
+        (team) => team.office_id === officeId
+    );
+    console.log(filteredTeams.value);
+};
+
+const updateTeamOnDesignation = (designationId) => {
+    // Check if user have selected any team for Bcm or Zm
+    if (designationId == 4 || designationId == 5) {
+        form.team_id = null;
+    }
+};
 </script>
 
 <style scope>

@@ -20,7 +20,7 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $filters=$request->only(['name','code','status','designation','team','gender']);
-        $designations = EmployeeDesignation::query()->limit(EmployeeDesignation::count()-2)->get();
+        $designations = EmployeeDesignation::all();
         $teams = Team::all();
         $query=Employee::join('employee_designations', 'employees.designation_id', '=', 'employee_designations.designation_id')
         ->leftJoin('teams', 'employees.team_id', '=', 'teams.team_id') 
@@ -49,8 +49,8 @@ class EmployeeController extends Controller
             }
         }
 
-        $lastTwoDesignationIds = EmployeeDesignation::latest('designation_id')->limit(2)->pluck('designation_id');
-        $query->whereNotIn('employees.designation_id', $lastTwoDesignationIds);
+        // $lastTwoDesignationIds = EmployeeDesignation::latest('designation_id')->limit(2)->pluck('designation_id');
+        // $query->whereNotIn('employees.designation_id', $lastTwoDesignationIds);
         $employees = 
             $query->paginate(8)
             ->withQueryString();
@@ -69,8 +69,8 @@ class EmployeeController extends Controller
     {
         $offices = Office::all();
         $departments = Department::all();
-        $designations = EmployeeDesignation::query()->limit(EmployeeDesignation::count()-2)->get();
-        $teams = Team::all();
+        $designations = EmployeeDesignation::all();
+        $teams = Team::with('office')->get();
         $zms = Zm::leftJoin('employees as zm_employee', 'zm_employee.employee_id', '=', 'zms.employee_id')
         ->select(
             'zms.*',
@@ -152,7 +152,8 @@ class EmployeeController extends Controller
         $employee = Employee::where('employee_id', $id)->first();
         $offices = Office::all();
         $departments = Department::all();
-        $designations = EmployeeDesignation::query()->limit(EmployeeDesignation::count()-2)->get();
+        //$designations = EmployeeDesignation::query()->limit(EmployeeDesignation::count()-2)->get();
+        $designations = EmployeeDesignation::all();
         $teams = Team::all();
 
 
@@ -169,7 +170,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $employee = Employee::where('employee_id',$id)->first();
+    $employee = Employee::where('employee_id',$id)->first();
 
     $employee->update(
         $request->validate([

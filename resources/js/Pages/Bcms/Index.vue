@@ -2,10 +2,10 @@
     <Head title="Bcms" />
 
     <AuthenticatedLayout>
-        <template #header>Bussiness Center Managers </template>
+        <template #header>BCMs </template>
         <div>
             <Link
-                :href="route('team.create')"
+                :href="route('bcm.create')"
                 as="button"
                 class="btn-primary mb-4"
                 >Add Bcm</Link

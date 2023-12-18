@@ -2,6 +2,7 @@
     <Head title="Employees/create" />
 
     <AuthenticatedLayout>
+        <template #header> Teams/Create </template>
         <form
             @submit.prevent="create"
             class="w-full max-w-screen-md mx-auto p-6 bg-gray-50 rounded-lg shadow-md"
@@ -12,6 +13,22 @@
                     <input type="text" v-model="form.name" class="input" />
                     <div v-if="form.errors.name" class="input-error">
                         {{ form.errors.name }}
+                    </div>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
+                    <label class="label">Office</label>
+                    <select v-model="form.office_id" class="input">
+                        <option
+                            v-for="office in offices"
+                            :key="office.office_id"
+                            :value="office.office_id"
+                        >
+                            {{ office.name }}
+                        </option>
+                    </select>
+                    <div v-if="form.errors.office_id" class="input-error">
+                        {{ form.errors.office_id }}
                     </div>
                 </div>
 
@@ -28,8 +45,7 @@
                             :value="bcm.bcm_id"
                         >
                             {{ bcm.employee.first_name }}
-                            {{ bcm.employee.last_name }} BCM-
-                            {{ bcm.bcm_id }}
+                            {{ bcm.employee.last_name }} BCM-{{ bcm.bcm_id }}
                         </option>
                         <option :value="null">None</option>
                     </select>
@@ -67,19 +83,19 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 const form = useForm({
     name: null,
+    office_id: null,
     bcm_id: null,
     zm: null,
     zm_id: null,
 });
 const props = defineProps({
     bcms: Array,
-    teams: Array,
-    zms: Array,
+    offices: Array,
 });
 
 const create = () => form.post(route("team.store"));
 
-const updateZMs = async (bcmId) => {
+const updateZMs = (bcmId) => {
     console.log(bcmId);
     if (bcmId) {
         // Find the corresponding bcm in the list
@@ -96,14 +112,6 @@ const updateZMs = async (bcmId) => {
     } else {
         form.zm = null;
     }
-
-    // try {
-    //     const response = await this.$inertia.get(route("teams.index"));
-    //     console.log(response);
-    //     //zms.value = response.data; // Assuming the response contains an array of ZMs
-    // } catch (error) {
-    //     console.error("Error fetching ZMs:", error);
-    // }
 };
 </script>
 

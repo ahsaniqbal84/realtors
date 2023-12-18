@@ -2,6 +2,7 @@
     <Head title="Teams/edit" />
 
     <AuthenticatedLayout>
+        <template #header> Teams/Edit </template>
         <form
             @submit.prevent="update"
             class="w-full max-w-screen-md mx-auto p-6 bg-gray-50 rounded-lg shadow-md"
@@ -12,6 +13,22 @@
                     <input type="text" v-model="form.name" class="input" />
                     <div v-if="form.errors.name" class="input-error">
                         {{ form.errors.name }}
+                    </div>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 md:col-span-3">
+                    <label class="label">Office</label>
+                    <select v-model="form.office_id" class="input">
+                        <option
+                            v-for="office in offices"
+                            :key="office.office_id"
+                            :value="office.office_id"
+                        >
+                            {{ office.name }}
+                        </option>
+                    </select>
+                    <div v-if="form.errors.office_id" class="input-error">
+                        {{ form.errors.office_id }}
                     </div>
                 </div>
 
@@ -66,18 +83,20 @@ const props = defineProps({
     bcms: Array,
     team: Object,
     zms: Array,
+    offices: Array,
 });
 
 const form = useForm({
     name: props.team.name,
-    bcm_id: props.team.bcm_id,
+    bcm_id: props.team.bcm_id ?? null,
+    office_id: props.team.office_id,
     zm: null,
     zm_id: null,
 });
 
 const update = () => form.put(route("team.update", { id: props.team.team_id }));
 
-const updateZMs = async (bcmId) => {
+const updateZMs = (bcmId) => {
     console.log(bcmId);
     if (bcmId) {
         // Find the corresponding bcm in the list

@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id('team_id');
             $table->foreignId('bcm_id')->nullable()->default(null);
+            $table->foreignId('office_id');
             $table->char('name',100);
             $table->unsignedBigInteger('created_by')->nullable()->default(null);
             $table->unsignedBigInteger('update_by')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('bcm_id')->references('bcm_id')->on('bcms');
+            $table->foreign('office_id')->references('office_id')->on('offices');
         });
     }
 
