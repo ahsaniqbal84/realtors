@@ -8,14 +8,16 @@
                 :href="route('employee.create')"
                 as="button"
                 class="btn-primary"
-                >Add Employee</Link
             >
+                <i class="fa-solid fa-plus text-sm"></i> Employee
+            </Link>
         </div>
         <Filter
             :teams="teams"
             :designations="designations"
             :filters="filters"
         ></Filter>
+
         <EmployeesTable :employees="employees.data"></EmployeesTable>
         <div
             v-if="employees.data.length"
