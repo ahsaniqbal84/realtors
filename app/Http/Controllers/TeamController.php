@@ -71,7 +71,7 @@ class TeamController extends Controller
         $bcm = Bcm::with('employee')->find($team->bcm_id);
         $zm = Zm::with('employee')->find($bcm->zm_id);
         //$members = DB::table('employees')->leftJoin('employee_designations','employees.designation_id','=','employee_designations.designation_id')->where('team_id', $team->team_id)->select('employees.*','employee_designations.name as designation')->get();
-        $members = Employee::with('designation')->where('team_id', $team->team_id)->get();
+        $members = Employee::with('designation')->where('team_id', $team->team_id)->where('status','1')->get();
         return inertia::render('Teams/Show',['bcm'=>$bcm,'zm'=>$zm,'members'=>$members,'team'=>$team]);
     }
 

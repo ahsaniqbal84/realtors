@@ -25,7 +25,7 @@ class ZmController extends Controller
     {
         $zms = Employee::with('designation')->whereHas('designation', function ($query) {
             $query->where('designation_id', 5);
-        })->whereDoesntHave('zm')->get();
+        })->where('status',1)->whereDoesntHave('zm')->get();
 
         return Inertia::render('Zms/Create',['zms'=>$zms]);
 
@@ -66,6 +66,7 @@ class ZmController extends Controller
         $zms = Employee::with('designation')->whereHas('designation', function ($query) {
             $query->where('designation_id', 5);
         })
+        ->where('status',1)
         ->whereDoesntHave('zm')
         ->orWhere('employee_id',$current_zm->employee_id)->get();
 

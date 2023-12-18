@@ -28,7 +28,7 @@ class BcmController extends Controller
         $zms = Zm::with('employee')->get();
         $bcms = Employee::with('designation')->whereHas('designation', function ($query) {
             $query->where('designation_id', 4);
-        })->whereDoesntHave('bcm')->get();
+        })->where('status',1)->whereDoesntHave('bcm')->get();
 
         return Inertia::render('Bcms/Create',['zms'=>$zms,'investmentManagers'=>$bcms]);
     }
@@ -70,6 +70,7 @@ class BcmController extends Controller
         $investment_managers = Employee::with('designation')->whereHas('designation', function ($query) {
             $query->where('designation_id', 4);
         })
+        ->where('status',1)
         ->whereDoesntHave('bcm')
         ->orWhere('employee_id',$bcm->employee_id)->get();
         return Inertia::render('Bcms/Edit',['bcm'=>$bcm,'zms'=>$zms,'investmentManagers'=>$investment_managers]);
