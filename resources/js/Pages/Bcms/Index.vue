@@ -8,7 +8,8 @@
                 :href="route('bcm.create')"
                 as="button"
                 class="btn-primary mb-4"
-                >Add Bcm</Link
+                ><i class="fa-solid fa-plus text-sm"></i> Branch Center
+                Manager</Link
             >
         </div>
 

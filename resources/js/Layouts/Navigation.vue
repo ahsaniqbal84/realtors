@@ -151,7 +151,15 @@
                                 <i
                                     class="fas fa-file-invoice-dollar w-5 h-5"
                                 ></i>
-                                Invoices
+                                Targets
+                            </Link>
+                        </li>
+                        <li class="px-2 py-1 transition-colors duration-150">
+                            <Link class="w-full" :href="route('team.index')">
+                                <i
+                                    class="fas fa-file-invoice-dollar w-5 h-5"
+                                ></i>
+                                Rebates
                             </Link>
                         </li>
                         <!-- Add more submenu items as needed -->

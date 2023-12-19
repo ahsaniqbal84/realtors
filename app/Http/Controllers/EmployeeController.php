@@ -22,40 +22,17 @@ class EmployeeController extends Controller
         $filters=$request->only(['name','code','status','designation','team','gender']);
         $designations = EmployeeDesignation::all();
         $teams = Team::all();
-        $query=Employee::join('employee_designations', 'employees.designation_id', '=', 'employee_designations.designation_id')
-        ->leftJoin('teams', 'employees.team_id', '=', 'teams.team_id') 
-        ->select('employees.*', 'employee_designations.name as designation_name','teams.name as team_name')
-        ->orderByDesc('employees.created_at');
-        if($filters['name']??null){
-            $query->where('first_name',$filters['name'])
-                ->orWhere('last_name',$filters['name']);
-        }
-        if($filters['code']??null){
-            $query->where('code',$filters['code']);
-        }if($filters['gender']??null){
-            $query->where('gender',$filters['gender']);
-        }
-        if(isset($filters['status'])){
-            $query->where('status','=',$filters['status']);
-        }
-        if($filters['designation']??null){
-            $query->where('employees.designation_id',$filters['designation']);
-        }if(isset($filters['team'])){
-            if($filters['team']=="none"){
-                $query->where('employees.team_id',null);
-            }
-            else{
-            $query->where('employees.team_id',$filters['team']);
-            }
-        }
 
-        // $lastTwoDesignationIds = EmployeeDesignation::latest('designation_id')->limit(2)->pluck('designation_id');
-        // $query->whereNotIn('employees.designation_id', $lastTwoDesignationIds);
-        $employees = 
-            $query->paginate(8)
-            ->withQueryString();
+        $query = Employee::join('employee_designations', 'employees.designation_id', '=', 'employee_designations.designation_id')
+            ->leftJoin('teams', 'employees.team_id', '=', 'teams.team_id') 
+            ->select('employees.*', 'employee_designations.name as designation_name', 'teams.name as team_name')
+            ->orderByDesc('employees.created_at');
+
+        $this->applyFilters($query, $filters);
+    
         return inertia::render('Employees/Index',[
-            'employees'=>$employees,
+            'employees'=>$query->paginate(8)
+            ->withQueryString(),
             'designations'=>$designations,
             'teams'=>$teams,
             'filters'=>$filters,
@@ -93,46 +70,10 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-         // Validate the incoming request data
-
-    $request->validate([
-        // Add validation rules for other fields
-        'first_name' => 'required',
-        'last_name' => 'required',
-        'gender' => 'required',
-        'code' => 'required',
-        'office_id' => 'required|exists:offices,office_id',
-        'team_id' => 'nullable|exists:teams,team_id',
-        'department_id' => 'required|exists:departments,department_id',
-        'designation_id' => 'required|exists:employee_designations,designation_id',
-        'mobile_number' => 'required',
-        'city' => 'required',
-        'status' => 'required',
-    ]);
-    // Create a new employee
-    if($request->input('designation_id')==4){
-        
-    }
-    $employee = new Employee([
-        'first_name' => $request->input('first_name'),
-        'last_name' => $request->input('last_name'),
-        'gender' => $request->input('gender'),
-        'code' => $request->input('code'),
-        'team_id' => $request->input('team_id'),
-        'office_id' => $request->input('office_id'),
-        'department_id' => $request->input('department_id'),
-        'designation_id' => $request->input('designation_id'),
-        'mobile_number' => $request->input('mobile_number'),
-        'city' => $request->input('city'),
-        'status' => $request->input('status'),
-    ]);
-
-
-    $employee->save();
-
-    // You can add a success message or redirect to another page if needed
-
-    return redirect()->route('employee.index')->with('success','Employee is Created!');
+        $validatedData = $this->validateEmployeeData($request);
+        Employee::create($validatedData);
+    
+        return redirect()->route('employee.index')->with('success','Employee is Created!');
     }
 
     /**
@@ -146,9 +87,9 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Employee $employee)
     {
-        $employee = Employee::where('employee_id', $id)->first();
+        //$employee = Employee::where('employee_id', $id)->first();
         $offices = Office::all();
         $departments = Department::all();
         //$designations = EmployeeDesignation::query()->limit(EmployeeDesignation::count()-2)->get();
@@ -167,12 +108,31 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Employee $employee)
     {
-    $employee = Employee::where('employee_id',$id)->first();
+        //$employee = Employee::where('employee_id', $id)->first();
 
-    $employee->update(
-        $request->validate([
+        $validatedData = $this->validateEmployeeData($request);
+    
+        $employee->update($validatedData);
+    
+        return redirect()->route('employee.index')->with('success', 'Employee is updated!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Employee $employee)
+    {
+        //$employee = Employee::find($id);
+        $employee->status=0;
+        $employee->save();
+        return redirect()->route('employee.index')->with('success','Employee is deleted!');
+    }
+
+    protected function validateEmployeeData(Request $request)
+    {
+        return $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
             'gender' => 'required',
@@ -184,20 +144,39 @@ class EmployeeController extends Controller
             'mobile_number' => 'required',
             'city' => 'required',
             'status' => 'required',
-        ])
-    );
-
-    return redirect()->route('employee.index')->with('success','Employee is updated!');
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
+    protected function applyFilters($query, $filters)
     {
-        $employee = Employee::find($id);
-        $employee->status=0;
-        $employee->save();
-        return redirect()->route('employee.index')->with('success','Employee is deleted!');
+        return $query
+        ->when(optional($filters)['name'], function ($query, $value) {
+            $query->where(function ($query) use ($value) {
+                $query->where('first_name', $value)
+                    ->orWhere('last_name', $value);
+            });
+        })
+        ->when(optional($filters)['code'], function ($query, $value) {
+            $query->where('code', $value);
+        })
+        ->when(optional($filters)['gender'], function ($query, $value) {
+            $query->where('gender', $value);
+        })
+        ->when(isset($filters['status']), function ($query) use ($filters) {
+            // If 'status' is present, use its value. Otherwise, skip the condition.
+            $query->where('status', $filters['status']);
+        })
+        ->when(optional($filters)['designation'], function ($query, $value) {
+            $query->where('employees.designation_id', $value);
+        })
+        ->when(optional($filters)['team'], function ($query) use ($filters) {
+            $query->where(function ($query) use ($filters) {
+                $query->when($filters['team'] == "none", function ($query) {
+                    $query->whereNull('employees.team_id');
+                }, function ($query) use ($filters) {
+                    $query->where('employees.team_id', $filters['team']);
+                });
+            });
+        });
     }
 }

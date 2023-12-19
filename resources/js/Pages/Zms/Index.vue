@@ -8,7 +8,7 @@
                 :href="route('zm.create')"
                 as="button"
                 class="btn-primary mb-4"
-                >Add ZM</Link
+                ><i class="fa-solid fa-plus text-sm"></i> Zonal Manager</Link
             >
         </div>
 

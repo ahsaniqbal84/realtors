@@ -8,7 +8,7 @@
                 :href="route('team.create')"
                 as="button"
                 class="btn-primary mb-4"
-                >Add Team</Link
+                ><i class="fa-solid fa-plus text-sm"></i> Team</Link
             >
         </div>
 

@@ -1,4 +1,19 @@
 <template>
+    <div
+        class="mb-4 inline-flex w-full overflow-hidden rounded-lg bg-gray-50 shadow-md"
+    >
+        <div class="flex w-12 items-center justify-center bg-purple-500">
+            <i class="fas fa-info-circle text-white"></i>
+        </div>
+
+        <div class="-mx-3 px-4 py-2">
+            <div class="mx-3">
+                <span class="font-semibold text-purple-500">Info</span>
+                <p class="text-sm text-gray-600">Zonal Managers table</p>
+            </div>
+        </div>
+    </div>
+
     <div class="container overflow-y-auto">
         <table class="w-full">
             <thead>
