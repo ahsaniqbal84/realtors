@@ -5,11 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ZmController;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\BcmController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +49,8 @@ Route::resource('employee', EmployeeController::class)->except('show')->middlewa
 Route::resource('team', TeamController::class)->middleware(['auth', 'verified']);
 Route::resource('bcm', BcmController::class)->middleware(['auth', 'verified']);
 Route::resource('zm', ZmController::class)->middleware(['auth', 'verified']);
+Route::resource('customer', CustomerController::class)->middleware(['auth', 'verified']);
+Route::resource('project', ProjectController::class)->middleware(['auth', 'verified']);
 
 // Route::get('/employees', [EmployeesController::class, 'index'])->name('employees.index');
 // Route::get('/employees/create', [EmployeesController::class, 'create'])->name('employees.create');

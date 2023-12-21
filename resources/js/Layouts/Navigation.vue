@@ -167,6 +167,32 @@
                 </div>
             </transition>
             <nav-link
+                :href="route('customer.index')"
+                :active="
+                    route().current('customer.index') ||
+                    route().current('customer.create') ||
+                    route().current('customer.edit')
+                "
+            >
+                <template #icon>
+                    <i class="fa-solid fa-user-group w-5 h-5"></i>
+                </template>
+                Customers
+            </nav-link>
+            <nav-link
+                :href="route('project.index')"
+                :active="
+                    route().current('project.index') ||
+                    route().current('project.create') ||
+                    route().current('project.edit')
+                "
+            >
+                <template #icon>
+                    <i class="fa fa-cogs w-5 h-5"></i>
+                </template>
+                Projects
+            </nav-link>
+            <nav-link
                 :href="route('users.index')"
                 :active="route().current('users.index')"
             >

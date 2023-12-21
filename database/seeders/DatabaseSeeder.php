@@ -60,7 +60,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\Employee::factory(20)->create();
 
         DB::table('customers')->insert([
-            ['first_name' => 'test','last_name'=>'customer','cnic'=>'1234567891011','address'=>'from islamabad','employee_id'=>1,'status'=>true]
+            ['first_name' => 'test','last_name'=>'customer','cnic'=>'1234567891011','address'=>'from islamabad','employee_id'=>1,'status'=>true],
+            ['first_name' => 'customer','last_name'=>'2','cnic'=>'1234567891451','address'=>'from rawalpindi','employee_id'=>2,'status'=>true],
+            ['first_name' => 'customer','last_name'=>'3','cnic'=>'1234563491011','address'=>'from peshawar','employee_id'=>1,'status'=>true],
         ]);
 
         DB::table('zms')->insert([
@@ -70,6 +72,13 @@ class DatabaseSeeder extends Seeder
         DB::table('bcms')->insert([
             ['employee_id'=>3,'zm_id'=>1,],
             ['employee_id'=>2,'zm_id'=>1,],
+        ]);
+
+        DB::table('projects')->insert([
+            ['name'=>'AH Tower','city'=>'Peshawar','slug'=>'ah-tower','no_of_floor'=>20,'description'=>'Located in Peshawar under the category of commercial and residential.','status'=>1],
+            ['name'=>'Mall of Hangu','city'=>'Hangu','slug'=>'mall-of-hangu','no_of_floor'=>4,'description'=>'Located in District Hangu of KP.','status'=>1],
+            ['name'=>'North Hills','city'=>'Murree','slug'=>'north-hills','no_of_floor'=>6,'description'=>'The projects designated as residential.','status'=>1],
+            ['name'=>'Florenza','city'=>'Peshawar','slug'=>'florenza','no_of_floor'=>10,'description'=>'The project is designated as commercial and residential.','status'=>1],
         ]);
 
         DB::table('teams')->insert([
